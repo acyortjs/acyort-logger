@@ -27,6 +27,7 @@ class Logger {
   enable(tags) {
     if (tags === undefined) {
       this.logger = global.console.log
+      this.disabled = []
     } else {
       tags.forEach((tag) => {
         this.disabled = this.disabled.filter(id => id !== tag)
