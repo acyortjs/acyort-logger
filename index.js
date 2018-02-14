@@ -2,19 +2,52 @@ const chalk = require('chalk')
 
 class Logger {
   constructor() {
-    this.log = global.console.log
+    this.logger = global.console.log
+    this.disabled = []
   }
 
-  error(message) {
-    this.log(chalk.red('\u2716'), message)
+  log(sign, message, tag) {
+    if (this.disabled.indexOf(tag) === -1) {
+      this.logger(sign, message)
+    }
   }
 
-  success(message) {
-    this.log(chalk.green('\u2714'), message)
+  disable(tags) {
+    if (tags === undefined) {
+      this.logger = () => null
+    } else {
+      tags.forEach((tag) => {
+        if (this.disabled.indexOf(tag) === -1) {
+          this.disabled.push(tag)
+        }
+      })
+    }
   }
 
-  info(message) {
-    this.log(chalk.blue('\u0069'), message)
+  enable(tags) {
+    if (tags === undefined) {
+      this.logger = global.console.log
+    } else {
+      tags.forEach((tag) => {
+        this.disabled = this.disabled.filter(id => id !== tag)
+      })
+    }
+  }
+
+  error(...args) {
+    this.log(chalk.red('\u2716'), ...args)
+  }
+
+  success(...args) {
+    this.log(chalk.green('\u2714'), ...args)
+  }
+
+  warn(...args) {
+    this.log(chalk.yellow('\u0069'), ...args)
+  }
+
+  info(...args) {
+    this.log(chalk.blue('\u0069'), ...args)
   }
 }
 
