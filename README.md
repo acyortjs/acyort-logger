@@ -21,10 +21,26 @@ const logger = new Logger()
 logger.error('error')
 logger.success('success')
 logger.info('info')
+logger.warn('warn')
 
 /*
 ✖ error
 ✔ success
 i info
+i warn
 */
+
+logger.error('error', 'tag')
+// ✖ error
+
+logger.disable(['tag'])
+logger.error('error', 'tag')
+// nothing log
+
+logger.enable(['tag'])
+logger.error('error', 'tag')
+// ✖ error
+
+logger.disable()    // disable all log
+logger.enable()     // enable all log
 ```
