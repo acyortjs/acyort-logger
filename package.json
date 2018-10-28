@@ -4,9 +4,7 @@
   "description": "Node Logger",
   "main": "index.js",
   "scripts": {
-    "test": "npm run test:lint && npm run test:cover",
-    "test:unit": "mocha --reporter dot --require intelli-espower-loader ./test",
-    "test:lint": "eslint ."
+    "test": "eslint . && node test/index.js"
   },
   "repository": {
     "type": "git",
@@ -23,15 +21,11 @@
   },
   "homepage": "https://github.com/acyortjs/logger#readme",
   "devDependencies": {
-    "eslint": "^4.12.1",
-    "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-plugin-import": "^2.8.0",
-    "intelli-espower-loader": "^1.0.1",
-    "istanbul": "^0.4.5",
-    "mocha": "^4.0.1",
-    "power-assert": "^1.4.4",
-    "sinon": "^4.3.0"
+    "eslint": "^5.8.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0"
   },
   "dependencies": {
+    "chalk": "^2.4.1"
   }
 }
