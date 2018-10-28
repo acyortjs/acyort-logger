@@ -1,29 +1,27 @@
 {
-  "name": "acyort-logger",
+  "name": "@acyort/logger",
   "version": "1.0.0",
-  "description": "Logger for AcyOrt",
+  "description": "Node Logger",
   "main": "index.js",
   "scripts": {
     "test": "npm run test:lint && npm run test:cover",
     "test:unit": "mocha --reporter dot --require intelli-espower-loader ./test",
-    "test:lint": "eslint .",
-    "test:cover": "istanbul cover --print both _mocha ./test"
+    "test:lint": "eslint ."
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/acyortjs/acyort-logger.git"
+    "url": "git+https://github.com/acyortjs/logger.git"
   },
   "keywords": [
     "log",
-    "acyort",
     "console"
   ],
-  "author": "LoeiFy@gmail.com",
+  "author": "LoeiFy <LoeiFy@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/acyortjs/acyort-logger/issues"
+    "url": "https://github.com/acyortjs/logger/issues"
   },
-  "homepage": "https://github.com/acyortjs/acyort-logger#readme",
+  "homepage": "https://github.com/acyortjs/logger#readme",
   "devDependencies": {
     "eslint": "^4.12.1",
     "eslint-config-airbnb-base": "^12.1.0",
@@ -35,6 +33,5 @@
     "sinon": "^4.3.0"
   },
   "dependencies": {
-    "chalk": "^2.3.0"
   }
 }
