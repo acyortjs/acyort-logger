@@ -1,8 +1,11 @@
 {
   "name": "@acyort/logger",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Node Logger",
   "main": "index.js",
+  "files": [
+    "index.js"
+  ],
   "scripts": {
     "test": "eslint . && node test/index.js && DISABLE_LOGGER='test:log,info' node test/log.js"
   },
