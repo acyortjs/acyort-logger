@@ -1,44 +1,48 @@
 const chalk = require('chalk')
 
-class Logger {
-  constructor() {
-    this.logger = global.console.log
-    this.disabled = false
+function logger(current, ...args) {
+  const { DISABLE_LOGGER: envDisable } = process.env
+  const { DISABLE_LOGGER: varDisable } = global
+  const disable = envDisable || varDisable
+
+  if (!disable) {
+    global.console.log(...args)
+    return
   }
 
-  disable() {
-    this.disabled = true
+  const [name, type] = disable.split(':')
+  const [cname, ctype] = current.split(':')
+
+  if (name !== cname) {
+    global.console.log(...args)
+    return
   }
 
-  enable() {
-    this.disabled = false
+  if (!type || type.split(',').map(s => s.trim()).indexOf(ctype) > -1) {
+    return
   }
 
-  log(...args) {
-    this.call(...args)
-  }
-
-  error(...args) {
-    this.call(chalk.red('ERROR'), ...args)
-  }
-
-  success(...args) {
-    this.call(chalk.green('SUCCESS'), ...args)
-  }
-
-  warn(...args) {
-    this.call(chalk.yellow('WARN'), ...args)
-  }
-
-  info(...args) {
-    this.call(chalk.blue('INFO'), ...args)
-  }
-
-  call(...args) {
-    if (!this.disabled) {
-      this.logger(...args)
-    }
-  }
+  global.console.log(...args)
 }
 
-module.exports = Logger
+module.exports = (name = 'acyort') => ({
+  log(...args) {
+    logger(`${name}:log`, ...args)
+  },
+
+  error(...args) {
+    logger(`${name}:error`, chalk.red('ERROR'), ...args)
+  },
+
+  success(...args) {
+    logger(`${name}:success`, chalk.green('SUCCESS'), ...args)
+  },
+
+  warn(...args) {
+    logger(`${name}:warn`, chalk.yellow('WARN'), ...args)
+  },
+
+  info(...args) {
+    logger(`${name}:info`, chalk.blue('INFO'), ...args)
+  },
+})

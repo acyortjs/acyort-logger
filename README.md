@@ -11,9 +11,7 @@ $ npm i @acyort/logger -S
 ## Usage
 
 ```js
-const Logger = require('@acyort/logger')
-
-const logger = new Logger()
+const logger = require('@acyort/logger')('test')  // default name: acyort
 
 logger.log('log')
 logger.success('success')
@@ -29,6 +27,11 @@ INFO info
 ERROR error
 */
 
-logger.disable()    // disable
-logger.enable()     // enable
+/* disable logger */
+global.DISABLE_LOGGER = 'acyort' // disable `acyort` logger
+global.DISABLE_LOGGER = 'test:error' // disable `test` error logger
+global.DISABLE_LOGGER = 'test:error,info' // disable `test` error, info logger
+
+/* set env disable logger */
+// DISABLE_LOGGER='test:log' node index.js
 ```
